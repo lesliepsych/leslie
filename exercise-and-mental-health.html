@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Physical Exercise Helps Our Mental Health — Leslie A. Esperida</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7A8B6F;
+    --sage-light: #A8B89E;
+    --sage-pale: #E8EDE5;
+    --warm-cream: #FAF6F1;
+    --warm-white: #FDFCFA;
+    --terracotta: #C4785B;
+    --terracotta-light: #E8A88C;
+    --deep-forest: #2C3E2D;
+    --charcoal: #2D2D2D;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --gold-accent: #C9A96E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-primary);
+    background: var(--warm-cream);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250, 246, 241, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    padding: 0.8rem 4rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--deep-forest);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px; background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--deep-forest); }
+  .nav-links a:hover::after { width: 100%; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--deep-forest); transition: all 0.3s;
+  }
+
+  /* ── BLOG HERO ── */
+  .blog-hero {
+    padding: 10rem 4rem 4rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--warm-cream) 0%, var(--sage-pale) 50%, var(--warm-cream) 100%);
+  }
+  .blog-hero::before {
+    content: '';
+    position: absolute; top: -15%; right: -8%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.1) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+  .blog-hero-content {
+    max-width: 750px; margin: 0 auto;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease-out;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .blog-category-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    border: 1.5px solid var(--terracotta-light);
+    border-radius: 100px;
+  }
+  .blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--deep-forest);
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .blog-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .blog-meta {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap;
+    font-size: 0.85rem; color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+  .blog-meta-item {
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .blog-meta-item svg { width: 16px; height: 16px; }
+  .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--sage-light); }
+
+  /* ── ARTICLE ── */
+  .article-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .article-container p {
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 1.6rem;
+    font-weight: 300;
+  }
+
+  .article-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep-forest);
+    margin: 3rem 0 1rem;
+    line-height: 1.3;
+  }
+
+  .article-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--deep-forest);
+    margin: 2.5rem 0 0.8rem;
+    line-height: 1.35;
+  }
+
+  .lead-text {
+    font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    font-weight: 400 !important;
+    line-height: 1.85 !important;
+    border-left: 3px solid var(--sage);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem !important;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .article-quote {
+    margin: 3rem 0;
+    padding: 2rem 2.5rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border-left: 4px solid var(--sage);
+    position: relative;
+  }
+  .article-quote::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--sage-pale);
+    position: absolute;
+    top: -0.5rem; left: 1.2rem;
+    line-height: 1;
+  }
+  .article-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--deep-forest);
+    line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .article-quote cite {
+    display: block; margin-top: 0.8rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.82rem; color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── KEY INSIGHT BOX ── */
+  .insight-box {
+    margin: 2.5rem 0;
+    padding: 1.8rem 2rem;
+    background: linear-gradient(135deg, var(--sage-pale), #dfe8d8);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.2);
+  }
+  .insight-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .insight-box-title svg { width: 18px; height: 18px; color: var(--sage); }
+  .insight-box p {
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  /* ── CHEMICAL CARDS ── */
+  .chem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2.5rem 0;
+  }
+  .chem-card {
+    padding: 1.8rem;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .chem-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  }
+  .chem-card::after {
+    content: '';
+    position: absolute;
+    top: -30%; right: -20%;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .chem-card.endorphins {
+    background: linear-gradient(135deg, #f3e8e2, #f9f0ea);
+    border: 1px solid rgba(196,120,91,0.15);
+  }
+  .chem-card.endorphins::after { background: var(--terracotta); }
+  .chem-card.serotonin {
+    background: linear-gradient(135deg, var(--sage-pale), #d6e2cf);
+    border: 1px solid rgba(122,139,111,0.2);
+  }
+  .chem-card.serotonin::after { background: var(--sage); }
+  .chem-card.dopamine {
+    background: linear-gradient(135deg, #f0ead6, #f5f0e0);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .chem-card.dopamine::after { background: var(--gold-accent); }
+  .chem-card.norepinephrine {
+    background: linear-gradient(135deg, #e4e8ed, #edf0f4);
+    border: 1px solid rgba(44,62,45,0.12);
+  }
+  .chem-card.norepinephrine::after { background: var(--deep-forest); }
+  .chem-emoji {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .chem-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.15rem;
+  }
+  .chem-card .chem-nickname {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .chem-card.endorphins .chem-nickname { color: var(--terracotta); }
+  .chem-card.serotonin .chem-nickname { color: var(--sage); }
+  .chem-card.dopamine .chem-nickname { color: var(--gold-accent); }
+  .chem-card.norepinephrine .chem-nickname { color: var(--charcoal); }
+  .chem-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── BENEFIT CARDS ── */
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .benefit-card {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.3s;
+  }
+  .benefit-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .benefit-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--sage-pale);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+  .benefit-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .benefit-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── SCENARIO CARDS ── */
+  .scenario {
+    margin: 2rem 0;
+    padding: 1.5rem 1.8rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.1);
+  }
+  .scenario-label {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.5rem;
+  }
+  .scenario-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.6rem;
+  }
+  .scenario p {
+    font-size: 0.92rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .scenario strong { color: var(--deep-forest); font-weight: 600; }
+
+  /* ── EXERCISE TYPE CARDS ── */
+  .exercise-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .exercise-card {
+    padding: 1.6rem 1.3rem;
+    background: var(--warm-white);
+    border-radius: 14px;
+    border: 1px solid rgba(122,139,111,0.12);
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .exercise-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+  }
+  .exercise-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .exercise-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.3rem;
+  }
+  .exercise-card .exercise-best {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .exercise-card p {
+    font-size: 0.82rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ── TIPS LIST ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .tip-card {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.3s;
+  }
+  .tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .tip-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sage-pale);
+    color: var(--deep-forest);
+    font-size: 0.78rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+  .tip-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .tip-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── STAT BANNER ── */
+  .stat-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--deep-forest);
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-banner::before {
+    content: '';
+    position: absolute; top: -40%; left: -10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.25) 0%, transparent 70%);
+  }
+  .stat-item {
+    position: relative; z-index: 1;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--sage-light);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.55);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* ── CLOSING CTA ── */
+  .blog-closing {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--deep-forest);
+    border-radius: 20px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .blog-closing::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.2) 0%, transparent 70%);
+  }
+  .blog-closing h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    position: relative; z-index: 1;
+  }
+  .blog-closing p {
+    color: rgba(255,255,255,0.6) !important;
+    max-width: 460px;
+    margin: 0 auto 1.5rem !important;
+    font-size: 0.95rem !important;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    background: #fff; color: var(--deep-forest);
+    transition: all 0.35s;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn:hover {
+    background: var(--sage-light); color: var(--deep-forest);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── AUTHOR BOX ── */
+  .author-box {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.12);
+  }
+  .author-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--sage-pale);
+  }
+  .author-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.2rem;
+  }
+  .author-info .author-title {
+    font-size: 0.8rem;
+    color: var(--sage);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+  }
+  .author-info p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep-forest);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 4rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: #fff; font-weight: 600;
+  }
+  .footer-logo span { color: var(--sage-light); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy {
+    width: 100%; text-align: center;
+    padding-top: 2rem; margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(250,246,241,0.98);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem 2rem; gap: 1.2rem;
+      border-bottom: 1px solid rgba(122,139,111,0.12);
+    }
+    .blog-hero { padding: 8rem 1.5rem 3rem; }
+    .article-container { padding: 3rem 1.5rem 4rem; }
+    .chem-grid { grid-template-columns: 1fr; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .exercise-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .stat-banner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .author-box { flex-direction: column; text-align: center; }
+    footer { padding: 2rem 1.5rem; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Leslie<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About Me</a></li>
+    <li><a href="index.html#journey">My Journey</a></li>
+    <li><a href="index.html#blog">Blog</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-content">
+    <div class="blog-category-tag">Wellness</div>
+    <h1>How Physical Exercise Helps Our <em>Mental Health</em></h1>
+    <div class="blog-meta">
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        Leslie A. Esperida
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        November 10, 2025
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        9 min read
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE CONTENT -->
+<article class="article-container">
+
+  <p class="lead-text reveal">
+    We often think of exercise as something we do for our bodies — to lose weight, build muscle, or improve heart health. But what if the most powerful benefit of movement wasn't physical at all? Science increasingly shows that exercise is one of the most effective, accessible, and underutilized tools for <em>mental health</em>.
+  </p>
+
+  <p class="reveal">
+    This isn't about running marathons or spending hours in the gym. It's about understanding that your brain and body are not separate systems — they are one deeply interconnected network. When you move your body, you are literally changing the chemistry, structure, and function of your brain.
+  </p>
+
+  <p class="reveal">
+    Let's explore exactly how physical exercise transforms our mental health, what happens inside the brain when we work out, and how even small amounts of movement can create profound psychological change.
+  </p>
+
+  <h2 class="reveal">Your Brain on Exercise: The Chemistry of Movement</h2>
+
+  <p class="reveal">
+    When you engage in physical activity, your brain doesn't just sit there while your muscles do the work. It launches a powerful cascade of neurochemical events — releasing a cocktail of chemicals that directly influence your mood, your thinking, and your emotional resilience.
+  </p>
+
+  <div class="chem-grid reveal">
+    <div class="chem-card endorphins">
+      <span class="chem-emoji">✨</span>
+      <h4>Endorphins</h4>
+      <span class="chem-nickname">The Natural Painkiller</span>
+      <p>Often behind the "runner's high," endorphins are your body's built-in opioids. They reduce the perception of pain and create feelings of euphoria and well-being — without any side effects.</p>
+    </div>
+    <div class="chem-card serotonin">
+      <span class="chem-emoji">🌿</span>
+      <h4>Serotonin</h4>
+      <span class="chem-nickname">The Mood Stabilizer</span>
+      <p>Exercise boosts serotonin production, the neurotransmitter most targeted by antidepressant medications. Higher serotonin levels are associated with improved mood, better sleep, and reduced anxiety.</p>
+    </div>
+    <div class="chem-card dopamine">
+      <span class="chem-emoji">⚡</span>
+      <h4>Dopamine</h4>
+      <span class="chem-nickname">The Reward Signal</span>
+      <p>Every time you complete a workout, your brain releases dopamine — the same chemical associated with motivation and pleasure. This creates a positive feedback loop that makes you want to move again.</p>
+    </div>
+    <div class="chem-card norepinephrine">
+      <span class="chem-emoji">🧊</span>
+      <h4>Norepinephrine</h4>
+      <span class="chem-nickname">The Stress Shield</span>
+      <p>Physical activity increases norepinephrine, which helps your brain respond to stress more efficiently. It sharpens attention, improves focus, and strengthens your brain's ability to manage pressure.</p>
+    </div>
+  </div>
+
+  <div class="insight-box reveal">
+    <div class="insight-box-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M10 22h4"/></svg>
+      Key Insight
+    </div>
+    <p>Exercise doesn't just temporarily boost your mood — it actually changes the structure of your brain over time. Research has shown that regular physical activity increases the volume of the hippocampus, the brain region critical for memory and emotional regulation, and promotes neurogenesis — the growth of entirely new brain cells.</p>
+  </div>
+
+  <h2 class="reveal">The Research: What Science Tells Us</h2>
+
+  <p class="reveal">
+    The link between exercise and mental health isn't a wellness trend or a motivational platitude. It's one of the most well-documented findings in modern psychology and neuroscience. Here's what the research shows:
+  </p>
+
+  <div class="stat-banner reveal">
+    <div class="stat-item">
+      <div class="stat-number">26%</div>
+      <div class="stat-label">Lower risk of depression<br>with regular activity</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">1.5×</div>
+      <div class="stat-label">More effective than<br>medication for depression</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">20%</div>
+      <div class="stat-label">Reduction in anxiety<br>symptoms after exercise</div>
+    </div>
+  </div>
+
+  <p class="reveal">
+    A landmark 2023 study published in the <em>British Journal of Sports Medicine</em> analyzed 97 reviews covering over 128,000 participants and found that physical activity was consistently as effective — and in some cases <em>more</em> effective — than counseling or medication for reducing symptoms of depression, anxiety, and psychological distress.
+  </p>
+
+  <p class="reveal">
+    This doesn't mean exercise should replace professional treatment. But it does suggest that movement deserves to be treated as a frontline intervention, not just a supplement to it.
+  </p>
+
+  <h2 class="reveal">Six Ways Exercise Transforms Mental Health</h2>
+
+  <p class="reveal">
+    The benefits of exercise go far beyond a mood boost after a jog. Regular physical activity fundamentally reshapes how your brain processes stress, emotions, and even your sense of self.
+  </p>
+
+  <div class="benefit-grid reveal">
+    <div class="benefit-card">
+      <div class="benefit-card-icon">😌</div>
+      <h4>Reduces Anxiety</h4>
+      <p>Exercise acts as a natural anxiolytic. It lowers muscle tension, interrupts the cycle of worry, and trains the body to recover from the fight-or-flight response more efficiently — making you literally more resilient to stress triggers.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-card-icon">🌙</div>
+      <h4>Improves Sleep Quality</h4>
+      <p>Physical activity helps regulate your circadian rhythm and promotes deeper, more restorative sleep. Better sleep, in turn, is one of the single most important factors in emotional regulation and mental clarity.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-card-icon">🛡️</div>
+      <h4>Builds Resilience to Stress</h4>
+      <p>When you exercise, you voluntarily expose your body to controlled stress — elevated heart rate, physical discomfort, fatigue. Over time, this trains your nervous system to handle psychological stress more calmly and recover more quickly.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-card-icon">🪞</div>
+      <h4>Strengthens Self-Esteem</h4>
+      <p>Every workout completed is a kept promise to yourself. Over time, consistent exercise builds a deep sense of self-efficacy — the belief that you are capable of setting a goal and following through. This belief ripples into every other area of life.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-card-icon">🧩</div>
+      <h4>Sharpens Cognitive Function</h4>
+      <p>Exercise increases blood flow to the brain and stimulates the release of Brain-Derived Neurotrophic Factor (BDNF), a protein that supports learning, memory, and the ability to think clearly under pressure.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-card-icon">🤝</div>
+      <h4>Fosters Social Connection</h4>
+      <p>Group exercise — whether it's a team sport, a fitness class, or a morning walk with a friend — provides structure for social interaction. Social connection is a fundamental human need and one of the strongest protective factors against mental illness.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">What Kind of Exercise Is Best for Mental Health?</h2>
+
+  <p class="reveal">
+    The short answer? The one you'll actually do. Research consistently shows that <em>any</em> form of physical activity offers mental health benefits. But different types of exercise have different psychological strengths:
+  </p>
+
+  <div class="exercise-grid reveal">
+    <div class="exercise-card">
+      <span class="exercise-emoji">🏃</span>
+      <h4>Aerobic Exercise</h4>
+      <span class="exercise-best">Best for: Depression & Anxiety</span>
+      <p>Running, cycling, swimming, and brisk walking are among the most studied forms of exercise for mental health. They produce the strongest increases in endorphins and serotonin.</p>
+    </div>
+    <div class="exercise-card">
+      <span class="exercise-emoji">🏋️</span>
+      <h4>Strength Training</h4>
+      <span class="exercise-best">Best for: Self-Esteem & Resilience</span>
+      <p>Lifting weights builds more than muscle. It cultivates discipline, mastery, and a tangible sense of progress — all of which strengthen self-worth and combat feelings of helplessness.</p>
+    </div>
+    <div class="exercise-card">
+      <span class="exercise-emoji">🧘</span>
+      <h4>Yoga & Mindful Movement</h4>
+      <span class="exercise-best">Best for: Stress & Emotional Regulation</span>
+      <p>Yoga combines physical movement with breathwork and mindfulness. It activates the parasympathetic nervous system, reducing cortisol levels and promoting a calm, grounded state of mind.</p>
+    </div>
+  </div>
+
+  <div class="article-quote reveal">
+    <blockquote>Exercise is the most transformative thing you can do for your brain today. It has immediate effects on cognition, mood, and long-term protective benefits against depression and neurodegenerative disease.</blockquote>
+    <cite>— Dr. Wendy Suzuki, neuroscientist and author</cite>
+  </div>
+
+  <h2 class="reveal">Real-Life Scenarios: Exercise in Action</h2>
+
+  <p class="reveal">
+    Understanding the science is one thing. Seeing how exercise plays out in the messy reality of everyday life is another. Here are some common situations where physical activity becomes a quiet game-changer:
+  </p>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 1</div>
+    <div class="scenario-title">You're Stuck in an Anxiety Spiral</div>
+    <p><strong>Without exercise:</strong> You lie in bed scrolling your phone, trying to distract yourself. The anxious thoughts loop endlessly. Your body is tense, your breathing is shallow, and sleep feels impossible.</p>
+    <p><strong>With exercise:</strong> A 20-minute walk or light jog interrupts the spiral. The rhythmic movement regulates your breathing, the endorphins soften the mental noise, and by the time you're done, your nervous system has shifted out of fight-or-flight mode.</p>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 2</div>
+    <div class="scenario-title">You Feel Worthless After a Setback</div>
+    <p><strong>Without exercise:</strong> You withdraw. You cancel plans. The voice in your head says, "What's the point?" and the days blur together into a fog of inactivity and self-criticism.</p>
+    <p><strong>With exercise:</strong> Even a small workout — a few stretches, a 10-minute bodyweight routine — breaks the pattern. You didn't conquer the world, but you showed up for yourself. That matters more than it sounds.</p>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 3</div>
+    <div class="scenario-title">You're Burned Out from Work</div>
+    <p><strong>Without exercise:</strong> You collapse on the couch after work, binge-watch shows, and feel oddly more exhausted the next morning. The burnout deepens because passive rest doesn't restore mental energy.</p>
+    <p><strong>With exercise:</strong> A post-work walk, swim, or yoga session provides <em>active recovery</em>. It shifts your brain from the cognitive fatigue of work to physical engagement, allowing mental restoration to begin.</p>
+  </div>
+
+  <h2 class="reveal">How to Start When You Don't Feel Like It</h2>
+
+  <p class="reveal">
+    Here's the cruel irony: the people who need exercise the most for their mental health are often the ones who feel least capable of doing it. Depression steals motivation. Anxiety makes leaving the house feel terrifying. And the very helplessness that exercise could relieve is the same helplessness that keeps you on the couch. So how do you start?
+  </p>
+
+  <div class="tips-grid reveal">
+    <div class="tip-card">
+      <div class="tip-number">1</div>
+      <h4>Use the 5-Minute Rule</h4>
+      <p>Commit to just 5 minutes. That's it. Tell yourself: "I'll just walk for 5 minutes, and if I want to stop, I can." Most of the time, once you start, you'll keep going. The hardest part is always beginning.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">2</div>
+      <h4>Detach from Performance</h4>
+      <p>You don't need to run fast, lift heavy, or look good doing it. The goal isn't fitness — it's <em>feeling</em>. A slow walk counts. Gentle stretching counts. Dancing in your kitchen counts.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">3</div>
+      <h4>Attach It to Something You Like</h4>
+      <p>Pair exercise with something enjoyable — a favorite playlist, a podcast, a scenic route, a friend. When movement is linked to pleasure, it becomes something you look forward to, not something you dread.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">4</div>
+      <h4>Make It Non-Negotiable, Not Optional</h4>
+      <p>Treat your daily movement like brushing your teeth — something you do regardless of how you feel. Schedule it. Set an alarm. Lay out your shoes the night before. Remove the decision entirely.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">5</div>
+      <h4>Track Your Mood, Not Your Reps</h4>
+      <p>After each session, note how you feel emotionally — not how many calories you burned. Over time, this builds an undeniable evidence base that exercise changes your mental state.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">6</div>
+      <h4>Be Compassionate with Missed Days</h4>
+      <p>You will miss days. That's okay. Consistency matters more than perfection. One skipped workout doesn't erase your progress — but letting guilt spiral you into quitting does. Get back on track gently.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">A Note on Exercise and Professional Treatment</h2>
+
+  <p class="reveal">
+    It's important to be clear: exercise is a powerful tool, but it is not a cure-all. For people dealing with clinical depression, severe anxiety, trauma, or other mental health conditions, physical activity should complement — not replace — professional support such as therapy and, when appropriate, medication.
+  </p>
+
+  <p class="reveal">
+    Think of exercise as one pillar of a holistic approach to mental health. It works best alongside good sleep, social connection, purposeful living, and professional guidance when needed. The goal isn't to "exercise your way out" of a mental health condition — it's to give your brain every possible advantage in the healing process.
+  </p>
+
+  <div class="insight-box reveal">
+    <div class="insight-box-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M10 22h4"/></svg>
+      Remember
+    </div>
+    <p>You don't need to become an athlete. You just need to move — regularly, gently, and with self-compassion. Your brain doesn't care if you ran a 5K or walked around the block. It only cares that you showed up.</p>
+  </div>
+
+  <h2 class="reveal">Final Thoughts</h2>
+
+  <p class="reveal">
+    We live in an era where mental health struggles are at an all-time high — and yet one of the most effective remedies has been available to us all along. It doesn't require a prescription. It doesn't require a therapist's office. It doesn't cost anything. It just requires you to move.
+  </p>
+
+  <p class="reveal">
+    Physical exercise is not just about building a stronger body. It's about building a stronger mind — one that can weather storms, recover from setbacks, and find moments of peace even in the chaos of daily life. Every step you take, every stretch you hold, every breath you take during movement is a small act of care toward the most important organ in your body: your brain.
+  </p>
+
+  <div class="article-quote reveal">
+    <blockquote>Movement is medicine for creating change in a person's physical, emotional, and mental states. When you move your body, you change your mind.</blockquote>
+    <cite>— Carol Welch</cite>
+  </div>
+
+  <p class="reveal">
+    So today, don't think about the perfect workout. Don't worry about the right shoes, the right plan, or the right time. Just move. Even a little. Your brain will thank you — not just today, but for years to come.
+  </p>
+
+  <!-- CLOSING CTA -->
+  <div class="blog-closing reveal">
+    <h3>Move Your Body, Free Your Mind</h3>
+    <p>Explore more insights on psychology, personal development, and mental well-being on the blog.</p>
+    <a href="index.html#blog" class="btn">Back to All Articles</a>
+  </div>
+
+  <!-- AUTHOR -->
+  <div class="author-box reveal">
+    <img src="Leslie.jpg" alt="Leslie A. Esperida" class="author-avatar">
+    <div class="author-info">
+      <h4>Leslie A. Esperida</h4>
+      <div class="author-title">Registered Psychometrician &amp; Certified Mental Health First Aider</div>
+      <p>BS Psychology graduate from Adamson University with experience in medical psychology and human resources. Passionate about making mental health knowledge accessible to everyone.</p>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Leslie<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About Me</a></li>
+      <li><a href="index.html#journey">My Journey</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">&copy; 2026 Leslie A. Esperida. All rights reserved. &nbsp;|&nbsp; Mental Health Advocacy</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

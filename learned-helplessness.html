@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learned Helplessness — Leslie A. Esperida</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7A8B6F;
+    --sage-light: #A8B89E;
+    --sage-pale: #E8EDE5;
+    --warm-cream: #FAF6F1;
+    --warm-white: #FDFCFA;
+    --terracotta: #C4785B;
+    --terracotta-light: #E8A88C;
+    --deep-forest: #2C3E2D;
+    --charcoal: #2D2D2D;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --gold-accent: #C9A96E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-primary);
+    background: var(--warm-cream);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250, 246, 241, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    padding: 0.8rem 4rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--deep-forest);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px; background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--deep-forest); }
+  .nav-links a:hover::after { width: 100%; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--deep-forest); transition: all 0.3s;
+  }
+
+  /* ── BLOG HERO ── */
+  .blog-hero {
+    padding: 10rem 4rem 4rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--warm-cream) 0%, var(--sage-pale) 50%, var(--warm-cream) 100%);
+  }
+  .blog-hero::before {
+    content: '';
+    position: absolute; top: -15%; right: -8%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.1) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+  .blog-hero-content {
+    max-width: 750px; margin: 0 auto;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease-out;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .blog-category-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    border: 1.5px solid var(--terracotta-light);
+    border-radius: 100px;
+  }
+  .blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--deep-forest);
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .blog-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .blog-meta {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap;
+    font-size: 0.85rem; color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+  .blog-meta-item {
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .blog-meta-item svg { width: 16px; height: 16px; }
+  .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--sage-light); }
+
+  /* ── ARTICLE ── */
+  .article-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .article-container p {
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 1.6rem;
+    font-weight: 300;
+  }
+
+  .article-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep-forest);
+    margin: 3rem 0 1rem;
+    line-height: 1.3;
+  }
+
+  .article-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--deep-forest);
+    margin: 2.5rem 0 0.8rem;
+    line-height: 1.35;
+  }
+
+  .lead-text {
+    font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    font-weight: 400 !important;
+    line-height: 1.85 !important;
+    border-left: 3px solid var(--sage);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem !important;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .article-quote {
+    margin: 3rem 0;
+    padding: 2rem 2.5rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border-left: 4px solid var(--sage);
+    position: relative;
+  }
+  .article-quote::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--sage-pale);
+    position: absolute;
+    top: -0.5rem; left: 1.2rem;
+    line-height: 1;
+  }
+  .article-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--deep-forest);
+    line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .article-quote cite {
+    display: block; margin-top: 0.8rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.82rem; color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── KEY INSIGHT BOX ── */
+  .insight-box {
+    margin: 2.5rem 0;
+    padding: 1.8rem 2rem;
+    background: linear-gradient(135deg, var(--sage-pale), #dfe8d8);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.2);
+  }
+  .insight-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .insight-box-title svg { width: 18px; height: 18px; color: var(--sage); }
+  .insight-box p {
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  /* ── EXPERIMENT CARDS ── */
+  .experiment-card {
+    margin: 2.5rem 0;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(122,139,111,0.15);
+    background: var(--warm-white);
+  }
+  .experiment-header {
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1rem;
+    border-bottom: 1px solid rgba(122,139,111,0.1);
+  }
+  .experiment-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.6rem;
+  }
+  .experiment-icon.dog { background: linear-gradient(135deg, #f3e8e2, #f9f0ea); }
+  .experiment-icon.elephant { background: linear-gradient(135deg, var(--sage-pale), #d6e2cf); }
+  .experiment-header-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--deep-forest);
+    margin: 0 0 0.2rem;
+  }
+  .experiment-header-text .experiment-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .experiment-body {
+    padding: 1.8rem 2rem;
+  }
+  .experiment-body p {
+    font-size: 0.98rem !important;
+    margin-bottom: 1.2rem !important;
+    line-height: 1.8 !important;
+  }
+  .experiment-body p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* ── PHASE STEPS ── */
+  .phase-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .phase-step {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+  }
+  .phase-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .phase-dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    color: #fff;
+    z-index: 1;
+  }
+  .phase-dot.phase-1 { background: var(--sage); }
+  .phase-dot.phase-2 { background: var(--terracotta); }
+  .phase-dot.phase-3 { background: var(--deep-forest); }
+  .phase-line {
+    width: 2px;
+    flex: 1;
+    background: var(--sage-pale);
+    min-height: 20px;
+  }
+  .phase-content {
+    padding: 0.3rem 0 1.8rem;
+    flex: 1;
+  }
+  .phase-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .phase-content p {
+    font-size: 0.9rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.7 !important;
+  }
+
+  /* ── IMPACT CARDS ── */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .impact-card {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.3s;
+  }
+  .impact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .impact-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--sage-pale);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+  }
+  .impact-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .impact-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── SIGNS LIST ── */
+  .signs-box {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f3e8e2, #f9f0ea);
+    border-radius: 16px;
+    border: 1px solid rgba(196,120,91,0.15);
+  }
+  .signs-box h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .signs-box h4 svg { width: 20px; height: 20px; }
+  .signs-box ul {
+    list-style: none;
+  }
+  .signs-box ul li {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .signs-box ul li::before {
+    content: '';
+    position: absolute; left: 0; top: 0.85rem;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+  }
+
+  /* ── TIPS LIST ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .tip-card {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.3s;
+  }
+  .tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .tip-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sage-pale);
+    color: var(--deep-forest);
+    font-size: 0.78rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+  .tip-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .tip-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── CLOSING CTA ── */
+  .blog-closing {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--deep-forest);
+    border-radius: 20px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .blog-closing::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.2) 0%, transparent 70%);
+  }
+  .blog-closing h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    position: relative; z-index: 1;
+  }
+  .blog-closing p {
+    color: rgba(255,255,255,0.6) !important;
+    max-width: 460px;
+    margin: 0 auto 1.5rem !important;
+    font-size: 0.95rem !important;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    background: #fff; color: var(--deep-forest);
+    transition: all 0.35s;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn:hover {
+    background: var(--sage-light); color: var(--deep-forest);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── AUTHOR BOX ── */
+  .author-box {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.12);
+  }
+  .author-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--sage-pale);
+  }
+  .author-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.2rem;
+  }
+  .author-info .author-title {
+    font-size: 0.8rem;
+    color: var(--sage);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+  }
+  .author-info p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep-forest);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 4rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: #fff; font-weight: 600;
+  }
+  .footer-logo span { color: var(--sage-light); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy {
+    width: 100%; text-align: center;
+    padding-top: 2rem; margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(250,246,241,0.98);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem 2rem; gap: 1.2rem;
+      border-bottom: 1px solid rgba(122,139,111,0.12);
+    }
+    .blog-hero { padding: 8rem 1.5rem 3rem; }
+    .article-container { padding: 3rem 1.5rem 4rem; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .author-box { flex-direction: column; text-align: center; }
+    footer { padding: 2rem 1.5rem; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+    .experiment-header { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Leslie<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About Me</a></li>
+    <li><a href="index.html#journey">My Journey</a></li>
+    <li><a href="index.html#blog">Blog</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-content">
+    <div class="blog-category-tag">Psychology</div>
+    <h1>Learned <em>Helplessness</em></h1>
+    <div class="blog-meta">
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        Leslie A. Esperida
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        December 27, 2026
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        10 min read
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE CONTENT -->
+<article class="article-container">
+
+  <p class="lead-text reveal">
+    Have you ever stopped trying — not because you couldn't, but because you believed it wouldn't matter? That quiet surrender, that invisible wall between you and possibility, has a name: <em>learned helplessness</em>. And it may be shaping your life more than you realize.
+  </p>
+
+  <p class="reveal">
+    Learned helplessness is a psychological condition in which a person — or animal — has been conditioned to believe that they have no control over their situation, even when opportunities for change are clearly available. It's not laziness. It's not a lack of ambition. It's a deeply internalized belief that nothing you do will make a difference.
+  </p>
+
+  <p class="reveal">
+    The concept was discovered somewhat accidentally in 1967, through a now-famous experiment that forever changed how we understand motivation, depression, and the human capacity to give up.
+  </p>
+
+  <h2 class="reveal">The Experiment That Started It All</h2>
+
+  <p class="reveal">
+    In the late 1960s, psychologists Martin Seligman and Steven Maier at the University of Pennsylvania were studying animal behavior when they stumbled upon something unexpected — and deeply revealing about the psychology of giving up.
+  </p>
+
+  <div class="experiment-card reveal">
+    <div class="experiment-header">
+      <div class="experiment-icon dog">🐕</div>
+      <div class="experiment-header-text">
+        <h3>Seligman & Maier's Dog Experiment</h3>
+        <div class="experiment-subtitle">University of Pennsylvania, 1967</div>
+      </div>
+    </div>
+    <div class="experiment-body">
+      <p>The experiment was conducted in three distinct phases, each revealing a deeper layer of how helplessness takes root:</p>
+
+      <div class="phase-steps">
+        <div class="phase-step">
+          <div class="phase-marker">
+            <div class="phase-dot phase-1">1</div>
+            <div class="phase-line"></div>
+          </div>
+          <div class="phase-content">
+            <h4>The Setup — Two Groups of Dogs</h4>
+            <p>Dogs were divided into three groups. <strong>Group 1</strong> was placed in harnesses and then released — serving as the control group. <strong>Group 2</strong> was placed in harnesses and given electric shocks, but they could stop the shocks by pressing a lever. <strong>Group 3</strong> was also shocked, but their lever did nothing — the shocks stopped only when Group 2's lever was pressed. Group 3 had no control.</p>
+          </div>
+        </div>
+        <div class="phase-step">
+          <div class="phase-marker">
+            <div class="phase-dot phase-2">2</div>
+            <div class="phase-line"></div>
+          </div>
+          <div class="phase-content">
+            <h4>The Conditioning — Helplessness Takes Hold</h4>
+            <p>Group 3 dogs quickly learned that their actions had no effect on the outcome. No matter what they did, the pain continued. Over time, they stopped trying to escape. They stopped pressing the lever. They simply lay down and whimpered, passively enduring the shocks.</p>
+          </div>
+        </div>
+        <div class="phase-step">
+          <div class="phase-marker">
+            <div class="phase-dot phase-3">3</div>
+          </div>
+          <div class="phase-content">
+            <h4>The Revelation — When Escape Was Possible</h4>
+            <p>All three groups were then placed in a new situation: a shuttle box divided by a low barrier. When shocked, the dogs simply needed to jump over the barrier to escape. Dogs from Groups 1 and 2 quickly figured this out and leaped to safety. But the dogs from Group 3 — the ones who had learned they had no control — <strong>didn't even try.</strong> They lay down. They accepted the pain. Even though escape was right in front of them, they had already learned that trying was pointless.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="reveal">
+    This was the birth of the theory of learned helplessness. Seligman and Maier demonstrated that when living beings are repeatedly exposed to uncontrollable negative situations, they develop a belief that they are powerless — and that belief persists even when circumstances change.
+  </p>
+
+  <div class="article-quote reveal">
+    <blockquote>It's not that they can't see the solution. It's that they've been conditioned to believe they are not the kind of creature that can enact one.</blockquote>
+    <cite>— on the phenomenon of learned helplessness</cite>
+  </div>
+
+  <h2 class="reveal">The Baby Elephant and the Rope</h2>
+
+  <p class="reveal">
+    While the dog experiment is the scientific foundation of learned helplessness, perhaps no story illustrates the concept more powerfully — and more heartbreakingly — than the parable of the baby elephant.
+  </p>
+
+  <div class="experiment-card reveal">
+    <div class="experiment-header">
+      <div class="experiment-icon elephant">🐘</div>
+      <div class="experiment-header-text">
+        <h3>The Elephant and the Rope</h3>
+        <div class="experiment-subtitle">A timeless parable on invisible chains</div>
+      </div>
+    </div>
+    <div class="experiment-body">
+      <p>When a baby elephant is being trained, its handlers tie one of its legs to a wooden stake driven into the ground using a thick rope. The baby elephant pulls and struggles with all its might, but it's too small and too weak to break free. After days, weeks, and months of failed attempts, the baby elephant eventually gives up. It stops pulling. It accepts the rope.</p>
+
+      <p>As the elephant grows into adulthood — becoming one of the most powerful animals on the planet, fully capable of uprooting trees — it remains tethered by that same small rope and stake. It doesn't even try to escape anymore. The rope hasn't changed. The elephant has. Not physically, but psychologically.</p>
+
+      <p>The fully grown elephant doesn't break free — <strong>not because it can't, but because it believes it can't.</strong> The limitation is no longer in the rope. It's in the elephant's mind. It carries the memory of its early helplessness into adulthood, long after the conditions that created that helplessness have disappeared.</p>
+    </div>
+  </div>
+
+  <div class="insight-box reveal">
+    <div class="insight-box-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M10 22h4"/></svg>
+      Key Insight
+    </div>
+    <p>We are all, in some way, the elephant. The "ropes" in our lives — past failures, critical voices, traumatic experiences — may no longer have power over us. But if we never test them again, we will never know that we've already outgrown them.</p>
+  </div>
+
+  <h2 class="reveal">How Learned Helplessness Shows Up in Human Lives</h2>
+
+  <p class="reveal">
+    Seligman's research didn't stop at animals. He and his colleagues went on to demonstrate that learned helplessness occurs in humans too — and it plays a significant role in depression, anxiety, chronic stress, and a wide range of self-defeating behaviors. Here are some of the most common ways it manifests:
+  </p>
+
+  <div class="impact-grid reveal">
+    <div class="impact-card">
+      <div class="impact-card-icon">📚</div>
+      <h4>In Education</h4>
+      <p>A student who repeatedly fails in math begins to believe they're "just not a math person." They stop studying, stop asking questions, and mentally check out — even when a new teacher offers support and better methods.</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-icon">💼</div>
+      <h4>In Careers</h4>
+      <p>An employee who gets passed over for promotions multiple times may stop putting in effort altogether. They believe that hard work doesn't matter for them, even when new opportunities arise under different leadership.</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-icon">💔</div>
+      <h4>In Relationships</h4>
+      <p>Someone who grew up in an environment where their feelings were consistently dismissed may stop expressing their needs as an adult — silently tolerating mistreatment because they've learned that speaking up changes nothing.</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-icon">🧠</div>
+      <h4>In Mental Health</h4>
+      <p>Learned helplessness is a significant contributing factor to clinical depression. The belief that nothing can improve becomes a self-fulfilling prophecy — withdrawing from life reinforces the very isolation and stagnation the person is trying to escape.</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-icon">💰</div>
+      <h4>In Financial Situations</h4>
+      <p>People who grew up in poverty sometimes internalize the belief that financial stability is simply not available to them. Even when resources or education become accessible, they may not pursue them — the invisible rope holds firm.</p>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-icon">🏥</div>
+      <h4>In Health & Wellness</h4>
+      <p>After multiple failed diets or exercise programs, a person may conclude that getting healthy is impossible for them specifically. They stop trying entirely, not because the path doesn't exist, but because they no longer believe they can walk it.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">Recognizing the Signs in Yourself</h2>
+
+  <p class="reveal">
+    One of the most insidious things about learned helplessness is that it often hides behind what feels like rational thinking. The inner voice sounds logical, even protective: <em>"Why bother?"</em>, <em>"This is just how things are for me,"</em>, <em>"I've tried before, and it didn't work."</em> But beneath the logic is a deeply conditioned belief — not a fact.
+  </p>
+
+  <div class="signs-box reveal">
+    <h4>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Common Signs of Learned Helplessness
+    </h4>
+    <ul>
+      <li>Giving up quickly when something feels difficult, even if you haven't really tried</li>
+      <li>Avoiding new challenges because you "already know" how it will end</li>
+      <li>Feeling passive or numb in situations where you actually have options</li>
+      <li>Believing that your circumstances are permanent and unchangeable</li>
+      <li>Attributing success to luck or external factors, but blaming failure on personal inadequacy</li>
+      <li>Using phrases like "There's no point," "It won't work for me," or "I've always been this way"</li>
+      <li>Feeling exhausted by the thought of trying, not by the actual effort itself</li>
+      <li>Staying in harmful situations because leaving feels impossible</li>
+    </ul>
+  </div>
+
+  <h2 class="reveal">Breaking the Invisible Chains</h2>
+
+  <p class="reveal">
+    The good news — and this is perhaps the most hopeful part of Seligman's research — is that learned helplessness can be unlearned. Just as it was conditioned through experience, it can be <em>de</em>conditioned through new experiences, new thinking patterns, and deliberate action. Here's how to start:
+  </p>
+
+  <div class="tips-grid reveal">
+    <div class="tip-card">
+      <div class="tip-number">1</div>
+      <h4>Challenge the Narrative</h4>
+      <p>When you hear yourself say "I can't" or "It won't work," pause. Ask: <em>"Is this a fact, or is this a belief I learned from past experience?"</em> Separating belief from evidence is the first step.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">2</div>
+      <h4>Start Impossibly Small</h4>
+      <p>Don't try to overhaul your life overnight. Take one tiny action that contradicts the helpless narrative. Send one application. Walk for five minutes. The goal isn't success — it's proving to yourself that action is possible.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">3</div>
+      <h4>Redefine Your Explanatory Style</h4>
+      <p>Seligman found that helpless people tend to explain bad events as permanent, pervasive, and personal. Practice reframing: this setback is <em>temporary</em>, <em>specific</em>, and <em>not entirely your fault</em>.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">4</div>
+      <h4>Seek Evidence of Your Own Agency</h4>
+      <p>Write down moments when you <em>did</em> make a difference, no matter how small. When you changed something. When you chose something. These are proof that you are not powerless.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">5</div>
+      <h4>Surround Yourself with New Mirrors</h4>
+      <p>Spend time with people who reflect your possibilities, not your limitations. The people around you shape what you believe is normal — and what you believe is possible.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">6</div>
+      <h4>Get Professional Support</h4>
+      <p>Cognitive Behavioral Therapy (CBT) is particularly effective for learned helplessness because it directly targets the distorted thinking patterns that keep you stuck. A trained professional can help you rewire beliefs that feel impossible to shake alone.</p>
+    </div>
+  </div>
+
+  <div class="insight-box reveal">
+    <div class="insight-box-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M10 22h4"/></svg>
+      From Helplessness to Hope
+    </div>
+    <p>Martin Seligman himself eventually shifted his life's work from studying helplessness to studying its opposite — <strong>learned optimism</strong>. His research showed that just as we can learn to be helpless, we can learn to be hopeful. Optimism, like helplessness, is a skill. And it can be practiced, strengthened, and made into a habit.</p>
+  </div>
+
+  <h2 class="reveal">The Rope Is Not the Problem</h2>
+
+  <p class="reveal">
+    If there is one thing to take away from this article, let it be this: the rope has never been the thing holding you back. The dogs could have jumped the barrier. The elephant could have snapped the rope. And you — you can do far more than your past has led you to believe.
+  </p>
+
+  <p class="reveal">
+    Learned helplessness is powerful, but it is not permanent. It is not who you are. It is something that happened to you — a pattern that was installed by circumstances beyond your control. And anything that was learned can, with patience, courage, and support, be <em>unlearned</em>.
+  </p>
+
+  <p class="reveal">
+    The first step isn't a giant leap of faith. It's a quiet one — the moment you look at the rope around your ankle and whisper to yourself: <em>"Maybe I'm stronger than this now. Maybe it's time to find out."</em>
+  </p>
+
+  <div class="article-quote reveal">
+    <blockquote>A person can be made helpless in one domain of life and remain masterful in others. The key is recognizing where you've stopped pulling — and choosing to try again.</blockquote>
+    <cite>— inspired by Martin Seligman's research</cite>
+  </div>
+
+  <!-- CLOSING CTA -->
+  <div class="blog-closing reveal">
+    <h3>Ready to Break Free?</h3>
+    <p>Explore more insights on psychology, personal development, and mental well-being on the blog.</p>
+    <a href="index.html#blog" class="btn">Back to All Articles</a>
+  </div>
+
+  <!-- AUTHOR -->
+  <div class="author-box reveal">
+    <img src="Leslie.jpg" alt="Leslie A. Esperida" class="author-avatar">
+    <div class="author-info">
+      <h4>Leslie A. Esperida</h4>
+      <div class="author-title">Registered Psychometrician &amp; Certified Mental Health First Aider</div>
+      <p>BS Psychology graduate from Adamson University with experience in medical psychology and human resources. Passionate about making mental health knowledge accessible to everyone.</p>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Leslie<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About Me</a></li>
+      <li><a href="index.html#journey">My Journey</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">&copy; 2026 Leslie A. Esperida. All rights reserved. &nbsp;|&nbsp; Mental Health Advocacy</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
