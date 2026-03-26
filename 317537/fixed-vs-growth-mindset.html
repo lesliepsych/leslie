@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixed Mindset vs Growth Mindset — Leslie A. Esperida</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7A8B6F;
+    --sage-light: #A8B89E;
+    --sage-pale: #E8EDE5;
+    --warm-cream: #FAF6F1;
+    --warm-white: #FDFCFA;
+    --terracotta: #C4785B;
+    --terracotta-light: #E8A88C;
+    --deep-forest: #2C3E2D;
+    --charcoal: #2D2D2D;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --gold-accent: #C9A96E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    color: var(--text-primary);
+    background: var(--warm-cream);
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250, 246, 241, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    padding: 0.8rem 4rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--deep-forest);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1.5px; background: var(--terracotta);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--deep-forest); }
+  .nav-links a:hover::after { width: 100%; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--deep-forest); transition: all 0.3s;
+  }
+
+  /* ── BLOG HERO ── */
+  .blog-hero {
+    padding: 10rem 4rem 4rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, var(--warm-cream) 0%, var(--sage-pale) 50%, var(--warm-cream) 100%);
+  }
+  .blog-hero::before {
+    content: '';
+    position: absolute; top: -15%; right: -8%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.1) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+  .blog-hero-content {
+    max-width: 750px; margin: 0 auto;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease-out;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .blog-category-tag {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    border: 1.5px solid var(--terracotta-light);
+    border-radius: 100px;
+  }
+  .blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--deep-forest);
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+  .blog-hero h1 em { font-style: italic; color: var(--terracotta); }
+  .blog-meta {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1.5rem; flex-wrap: wrap;
+    font-size: 0.85rem; color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+  .blog-meta-item {
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .blog-meta-item svg { width: 16px; height: 16px; }
+  .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--sage-light); }
+
+  /* ── ARTICLE ── */
+  .article-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+  }
+
+  .article-container p {
+    font-size: 1.08rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: 1.6rem;
+    font-weight: 300;
+  }
+
+  .article-container h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep-forest);
+    margin: 3rem 0 1rem;
+    line-height: 1.3;
+  }
+
+  .article-container h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--deep-forest);
+    margin: 2.5rem 0 0.8rem;
+    line-height: 1.35;
+  }
+
+  .lead-text {
+    font-size: 1.2rem !important;
+    color: var(--text-primary) !important;
+    font-weight: 400 !important;
+    line-height: 1.85 !important;
+    border-left: 3px solid var(--sage);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem !important;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .comparison-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  .comparison-card {
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+  }
+  .comparison-card.fixed {
+    background: linear-gradient(135deg, #f3e8e2, #f9f0ea);
+    border: 1px solid rgba(196,120,91,0.2);
+  }
+  .comparison-card.growth {
+    background: linear-gradient(135deg, var(--sage-pale), #d6e2cf);
+    border: 1px solid rgba(122,139,111,0.25);
+  }
+  .comparison-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .comparison-card.fixed h4 { color: var(--terracotta); }
+  .comparison-card.growth h4 { color: var(--deep-forest); }
+  .comparison-card h4 svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .comparison-card ul {
+    list-style: none;
+  }
+  .comparison-card ul li {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .comparison-card.fixed ul li::before {
+    content: '✕';
+    position: absolute; left: 0;
+    color: var(--terracotta); font-size: 0.75rem; font-weight: 700;
+    top: 0.6rem;
+  }
+  .comparison-card.growth ul li::before {
+    content: '✓';
+    position: absolute; left: 0;
+    color: var(--sage); font-size: 0.85rem; font-weight: 700;
+    top: 0.55rem;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .article-quote {
+    margin: 3rem 0;
+    padding: 2rem 2.5rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border-left: 4px solid var(--sage);
+    position: relative;
+  }
+  .article-quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--sage-pale);
+    position: absolute;
+    top: -0.5rem; left: 1.2rem;
+    line-height: 1;
+  }
+  .article-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--deep-forest);
+    line-height: 1.6;
+    position: relative; z-index: 1;
+  }
+  .article-quote cite {
+    display: block; margin-top: 0.8rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-style: normal;
+    font-size: 0.82rem; color: var(--text-light);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── KEY INSIGHT BOX ── */
+  .insight-box {
+    margin: 2.5rem 0;
+    padding: 1.8rem 2rem;
+    background: linear-gradient(135deg, var(--sage-pale), #dfe8d8);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.2);
+  }
+  .insight-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .insight-box-title svg { width: 18px; height: 18px; color: var(--sage); }
+  .insight-box p {
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  /* ── SCENARIO CARDS ── */
+  .scenario {
+    margin: 2rem 0;
+    padding: 1.5rem 1.8rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.1);
+  }
+  .scenario-label {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.5rem;
+  }
+  .scenario-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.6rem;
+  }
+  .scenario p {
+    font-size: 0.92rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .scenario strong { color: var(--deep-forest); font-weight: 600; }
+
+  /* ── TIPS LIST ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .tip-card {
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 12px;
+    border: 1px solid rgba(122,139,111,0.12);
+    transition: all 0.3s;
+  }
+  .tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .tip-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--sage-pale);
+    color: var(--deep-forest);
+    font-size: 0.78rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+  .tip-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.4rem;
+  }
+  .tip-card p {
+    font-size: 0.88rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── CLOSING CTA ── */
+  .blog-closing {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--deep-forest);
+    border-radius: 20px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .blog-closing::before {
+    content: '';
+    position: absolute; top: -50%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,139,111,0.2) 0%, transparent 70%);
+  }
+  .blog-closing h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    position: relative; z-index: 1;
+  }
+  .blog-closing p {
+    color: rgba(255,255,255,0.6) !important;
+    max-width: 460px;
+    margin: 0 auto 1.5rem !important;
+    font-size: 0.95rem !important;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 100px;
+    background: #fff; color: var(--deep-forest);
+    transition: all 0.35s;
+    position: relative; z-index: 1;
+  }
+  .blog-closing .btn:hover {
+    background: var(--sage-light); color: var(--deep-forest);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* ── AUTHOR BOX ── */
+  .author-box {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(122,139,111,0.12);
+  }
+  .author-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--sage-pale);
+  }
+  .author-info h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--deep-forest);
+    margin-bottom: 0.2rem;
+  }
+  .author-info .author-title {
+    font-size: 0.8rem;
+    color: var(--sage);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+  }
+  .author-info p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep-forest);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 4rem 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: #fff; font-weight: 600;
+  }
+  .footer-logo span { color: var(--sage-light); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: #fff; }
+  .footer-copy {
+    width: 100%; text-align: center;
+    padding-top: 2rem; margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(25px);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(250,246,241,0.98);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem 2rem; gap: 1.2rem;
+      border-bottom: 1px solid rgba(122,139,111,0.12);
+    }
+    .blog-hero { padding: 8rem 1.5rem 3rem; }
+    .article-container { padding: 3rem 1.5rem 4rem; }
+    .comparison-box { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .author-box { flex-direction: column; text-align: center; }
+    footer { padding: 2rem 1.5rem; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Leslie<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About Me</a></li>
+    <li><a href="index.html#journey">My Journey</a></li>
+    <li><a href="index.html#blog">Blog</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-content">
+    <div class="blog-category-tag">Mindset</div>
+    <h1>Fixed Mindset vs <em>Growth Mindset</em></h1>
+    <div class="blog-meta">
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+        Leslie A. Esperida
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        January 15, 2026
+      </div>
+      <div class="divider-dot"></div>
+      <div class="blog-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        8 min read
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE CONTENT -->
+<article class="article-container">
+
+  <p class="lead-text reveal">
+    Have you ever told yourself, <em>"I'm just not smart enough"</em> or <em>"I'll never be good at this"</em>? If so, you may be operating from a fixed mindset — a belief system that quietly limits your potential without you even realizing it.
+  </p>
+
+  <p class="reveal">
+    In 2006, Stanford psychologist Dr. Carol Dweck introduced a groundbreaking framework that reshaped how we understand human motivation, learning, and success. Through decades of research, she discovered that the way we perceive our own abilities profoundly affects how we live our lives — from how we handle failure to how we approach challenges.
+  </p>
+
+  <p class="reveal">
+    The concept is elegantly simple: people tend to hold one of two core beliefs about their intelligence and talents. These beliefs — the fixed mindset and the growth mindset — create entirely different psychological worlds, leading to dramatically different outcomes.
+  </p>
+
+  <h2 class="reveal">What Is a Fixed Mindset?</h2>
+
+  <p class="reveal">
+    A fixed mindset is the belief that your intelligence, talents, and abilities are static traits — you're born with a certain amount, and that's what you're stuck with. People with a fixed mindset tend to view every situation as a test of their inherent worth: <em>"Am I smart enough? Am I talented enough?"</em>
+  </p>
+
+  <p class="reveal">
+    This belief creates a constant need to prove yourself. If you believe talent is fixed, then every mistake feels like evidence that you simply don't have what it takes. This fear of failure can lead to avoiding challenges altogether, giving up easily when things get hard, and dismissing constructive feedback as a personal attack.
+  </p>
+
+  <div class="article-quote reveal">
+    <blockquote>In a fixed mindset, challenges are threatening. When people feel they might fail, they lose interest.</blockquote>
+    <cite>— Dr. Carol Dweck, Mindset: The New Psychology of Success</cite>
+  </div>
+
+  <h2 class="reveal">What Is a Growth Mindset?</h2>
+
+  <p class="reveal">
+    A growth mindset, on the other hand, is the belief that abilities can be developed through effort, effective strategies, and input from others. It doesn't mean anyone can become Einstein simply by trying hard — it means that a person's true potential is unknown and unknowable, and that it's impossible to foresee what years of passion and dedication can accomplish.
+  </p>
+
+  <p class="reveal">
+    People with a growth mindset see challenges as opportunities to improve, treat failures as valuable learning experiences, and find inspiration in other people's success rather than feeling threatened by it. They understand that mastery requires struggle, and that struggling doesn't mean you're failing — it means you're growing.
+  </p>
+
+  <h2 class="reveal">Side-by-Side: How They Differ</h2>
+
+  <div class="comparison-box reveal">
+    <div class="comparison-card fixed">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        Fixed Mindset
+      </h4>
+      <ul>
+        <li>Avoids challenges to protect self-image</li>
+        <li>Gives up easily when facing obstacles</li>
+        <li>Sees effort as pointless or a sign of weakness</li>
+        <li>Ignores or rejects constructive criticism</li>
+        <li>Feels threatened by others' success</li>
+        <li>Believes intelligence is a static trait</li>
+      </ul>
+    </div>
+    <div class="comparison-card growth">
+      <h4>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+        Growth Mindset
+      </h4>
+      <ul>
+        <li>Embraces challenges as learning opportunities</li>
+        <li>Persists through setbacks with resilience</li>
+        <li>Views effort as the path to mastery</li>
+        <li>Learns from feedback and applies it</li>
+        <li>Finds inspiration in others' achievements</li>
+        <li>Believes intelligence can be developed</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="reveal">Real-Life Scenarios</h2>
+
+  <p class="reveal">
+    To better understand how these mindsets play out in everyday life, let's look at some common situations many of us face.
+  </p>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 1</div>
+    <div class="scenario-title">You Fail an Important Exam</div>
+    <p><strong>Fixed Mindset:</strong> "I'm just not smart enough for this subject. I should probably drop it and focus on something easier."</p>
+    <p><strong>Growth Mindset:</strong> "This result shows me where my gaps are. I need to change my study strategy and ask for help on the topics I don't understand."</p>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 2</div>
+    <div class="scenario-title">Your Colleague Gets Promoted</div>
+    <p><strong>Fixed Mindset:</strong> "They probably just got lucky, or the boss plays favorites. It doesn't matter how hard I work."</p>
+    <p><strong>Growth Mindset:</strong> "Good for them — what skills or habits helped them stand out? Maybe I can learn from their approach."</p>
+  </div>
+
+  <div class="scenario reveal">
+    <div class="scenario-label">Scenario 3</div>
+    <div class="scenario-title">You Receive Critical Feedback</div>
+    <p><strong>Fixed Mindset:</strong> "They're attacking me personally. This means they don't think I'm competent."</p>
+    <p><strong>Growth Mindset:</strong> "This feedback is valuable data. Let me separate emotion from information and see what I can improve."</p>
+  </div>
+
+  <h2 class="reveal">The Neuroscience Behind It</h2>
+
+  <p class="reveal">
+    This isn't just motivational talk — it's backed by brain science. Research using EEG brain scans has shown that people with a growth mindset have significantly more brain activity when processing errors. Their brains literally engage more deeply with mistakes, treating them as signals to learn. In contrast, those with a fixed mindset show less brain activity in response to errors — their brains essentially shut down and disengage from the learning process.
+  </p>
+
+  <div class="insight-box reveal">
+    <div class="insight-box-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 2.4-1.2 4.5-3 5.7V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.3C6.2 13.5 5 11.4 5 9a7 7 0 0 1 7-7z"/><path d="M10 22h4"/></svg>
+      Key Insight
+    </div>
+    <p>Neuroplasticity — the brain's ability to form new neural connections throughout life — is the biological foundation of the growth mindset. Every time you learn something new or practice a skill, you are physically rewiring your brain.</p>
+  </div>
+
+  <p class="reveal">
+    This means that the growth mindset isn't just a feel-good philosophy. It's aligned with what neuroscience tells us about how the brain actually works: our neural pathways are not fixed at birth. They are shaped and reshaped by our experiences, efforts, and learning throughout our entire lives.
+  </p>
+
+  <h2 class="reveal">How to Cultivate a Growth Mindset</h2>
+
+  <p class="reveal">
+    The good news is that mindset itself is not fixed. You can shift from a fixed mindset to a growth mindset with intentional practice. Here are practical strategies to get started:
+  </p>
+
+  <div class="tips-grid reveal">
+    <div class="tip-card">
+      <div class="tip-number">1</div>
+      <h4>Reframe Your Self-Talk</h4>
+      <p>Replace "I can't do this" with "I can't do this <em>yet</em>." That one word — "yet" — opens the door to possibility and future growth.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">2</div>
+      <h4>Embrace Mistakes</h4>
+      <p>Instead of hiding from errors, analyze them. Ask yourself: "What did this experience teach me? What would I do differently next time?"</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">3</div>
+      <h4>Celebrate Effort, Not Just Results</h4>
+      <p>Praise the process — the hard work, the strategies, the persistence — not just the outcome. This builds intrinsic motivation.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">4</div>
+      <h4>Seek Out Challenges</h4>
+      <p>Deliberately step outside your comfort zone. Choose the harder path when you can — that discomfort is the feeling of your brain growing.</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">5</div>
+      <h4>Learn from Others</h4>
+      <p>Instead of comparing yourself and feeling inferior, study successful people. What habits and strategies do they use that you can adopt?</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-number">6</div>
+      <h4>Be Patient with Yourself</h4>
+      <p>Shifting your mindset is itself a growth process. You won't change overnight — and that's perfectly okay. Progress, not perfection.</p>
+    </div>
+  </div>
+
+  <h2 class="reveal">A Note on the "False Growth Mindset"</h2>
+
+  <p class="reveal">
+    Dr. Dweck herself has cautioned against what she calls the "false growth mindset" — simply saying you have a growth mindset without actually doing the work to change your thought patterns and behaviors. A true growth mindset requires honest self-reflection and a willingness to confront the fixed-mindset triggers that we all carry.
+  </p>
+
+  <p class="reveal">
+    Nobody is purely growth-minded or purely fixed-minded. We all exist on a spectrum, and different situations can trigger different mindsets. The key is self-awareness — noticing when your fixed mindset shows up and choosing to respond with a growth-oriented perspective.
+  </p>
+
+  <div class="article-quote reveal">
+    <blockquote>Becoming is better than being. The fixed mindset does not allow people the luxury of becoming. They have to already be.</blockquote>
+    <cite>— Dr. Carol Dweck</cite>
+  </div>
+
+  <h2 class="reveal">Final Thoughts</h2>
+
+  <p class="reveal">
+    Understanding the difference between a fixed mindset and a growth mindset is more than an academic exercise — it's a deeply personal one. It asks you to examine the stories you tell yourself about who you are and what you're capable of. Are those stories limiting you, or are they propelling you forward?
+  </p>
+
+  <p class="reveal">
+    As a mental health advocate, I've seen how deeply our beliefs about ourselves shape our emotional well-being. A fixed mindset can fuel anxiety, depression, and learned helplessness. A growth mindset, on the other hand, builds resilience — the psychological muscle that helps us bounce back from adversity and keep moving forward.
+  </p>
+
+  <p class="reveal">
+    You are not defined by your current abilities. You are defined by your willingness to grow. And that willingness? It's entirely within your control.
+  </p>
+
+  <!-- CLOSING CTA -->
+  <div class="blog-closing reveal">
+    <h3>Want to Keep Growing?</h3>
+    <p>Explore more insights on psychology, personal development, and mental well-being on the blog.</p>
+    <a href="index.html#blog" class="btn">Back to All Articles</a>
+  </div>
+
+  <!-- AUTHOR -->
+  <div class="author-box reveal">
+    <img src="Leslie.jpg" alt="Leslie A. Esperida" class="author-avatar">
+    <div class="author-info">
+      <h4>Leslie A. Esperida</h4>
+      <div class="author-title">Registered Psychometrician &amp; Certified Mental Health First Aider</div>
+      <p>BS Psychology graduate from Adamson University with experience in medical psychology and human resources. Passionate about making mental health knowledge accessible to everyone.</p>
+    </div>
+  </div>
+
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Leslie<span>.</span></div>
+    <ul class="footer-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About Me</a></li>
+      <li><a href="index.html#journey">My Journey</a></li>
+      <li><a href="index.html#blog">Blog</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">&copy; 2026 Leslie A. Esperida. All rights reserved. &nbsp;|&nbsp; Mental Health Advocacy</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
